@@ -67,7 +67,7 @@ listen_addresses:
 # Instructs stubby to distribute queries across all available name servers. 
 # Set to 0 to treat the upstreams below as an ordered list and use a single
 # upstream until it becomes unavailable, then use the next one.
-round_robin_upstreams: 1
+round_robin_upstreams: 0
 
 # Require DNSSEC validation. For releases earlier than 1.2 a trust anchor must
 # be configured configured manually. This can be done with unbound-anchor.
@@ -113,6 +113,26 @@ round_robin_upstreams: 1
 #              key
 #   tls_port: Port for TLS (default is 853)
 upstream_recursive_servers:
+  # The Cloudflare servers
+  - address_data: 1.1.1.1
+    tls_auth_name: "cloudflare-dns.com"
+    tls_pubkey_pinset:
+      - digest: "sha256"
+        value: yioEpqeR4WtDwE9YxNVnCEkTxIjx6EEIwFSQW+lJsbc=
+
+  # Google
+  - address_data: 8.8.8.8
+    tls_auth_name: "dns.google"
+    tls_pubkey_pinset:
+      - digest: "sha256"
+        value: nxmRHK4Oq08HNWWYZwakeCHmiKvsDsEaBPS3blQ+nSE=
+  - address_data: 8.8.4.4
+    tls_auth_name: "dns.google"
+    tls_pubkey_pinset:
+      - digest: "sha256"
+        value: nxmRHK4Oq08HNWWYZwakeCHmiKvsDsEaBPS3blQ+nSE=
+
+
 # IPv4 addresses
 # The Surfnet/Sinodun servers
 ###   - address_data: 145.100.185.15
@@ -150,18 +170,6 @@ upstream_recursive_servers:
 ###       - digest: "sha256"
 ###         value: foxZRnIh9gZpWnl+zEiKa0EJ2rdCGroMWm02gaxSc9Q=
 ### 
-  # Google
-  - address_data: 8.8.8.8
-    tls_auth_name: "dns.google"
-    tls_pubkey_pinset:
-      - digest: "sha256"
-        value: nxmRHK4Oq08HNWWYZwakeCHmiKvsDsEaBPS3blQ+nSE=
-  - address_data: 8.8.4.4
-    tls_auth_name: "dns.google"
-    tls_pubkey_pinset:
-      - digest: "sha256"
-        value: nxmRHK4Oq08HNWWYZwakeCHmiKvsDsEaBPS3blQ+nSE=
-
 
 # Additional servers
 
