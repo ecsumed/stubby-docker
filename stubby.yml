@@ -113,6 +113,11 @@ round_robin_upstreams: 0
 #              key
 #   tls_port: Port for TLS (default is 853)
 upstream_recursive_servers:
+
+  # Command to get pinset
+  # openssl s_client -connect '9.9.9.10:853' 2>/dev/null | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64 
+
+
   # Quad9 - Automatically blocks domains known to be associated with malicious activity
   - address_data: 9.9.9.9
     tls_auth_name: "dns.quad9.net"
